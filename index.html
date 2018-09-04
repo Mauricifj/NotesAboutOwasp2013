@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>OWASP</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="bootstrap.min.css" rel="stylesheet" />
+	<style>
+		body
+		{
+			background-color: black;
+		}
+		.container-fluid
+		{
+			margin: 1% 5%;
+			padding: 1% 2%;
+			width: auto;
+		}
+		span {padding-left: 10px;}
+
+		.index{background-color: darkturquoise;}
+		.bg1, .bg3, .bg5, .bg7, .bg9 {background-color: darkseagreen;}
+		.bg2, .bg4, .bg6, .bg8, .bg0 {background-color: deepskyblue;} 
+	</style>
+</head>
+<body>
+	<div class="container-fluid index" style="cursor: pointer;" data-toggle="collapse" href="#index">
+			<h3 class="text-dark" data-toggle="collapse" href="#index">Index</h3>
+			
+			<div class="container-fluid collapse"  id="index">
+				<ul class="list-group collapse">
+					<a class="list-group-item" href="#injection">Injection</a>
+					<a class="list-group-item" href="#xss">Cross Site Scripting (XSS)</a>
+					<a class="list-group-item" href="#session">Broken Authentication and Session Management</a>
+					<a class="list-group-item" href="#objReference">Insecure Direct Object References</a>
+					<a class="list-group-item" href="#csrf">Cross Site Request Forgery (CSRF)</a>
+					<a class="list-group-item" href="#security">Security Misconfiguration</a>
+					<a class="list-group-item" href="#crypto">Insecure Cryptographic Storage</a>
+					<a class="list-group-item" href="#urlAccess">Failure to Restrict URL Access</a>
+					<a class="list-group-item" href="#tls">Insufficient Transport Layer Protection</a>
+					<a class="list-group-item" href="#redirects">Unvalidated Redirects and Forwards</a>
+				</ul>
+			</div>
+	</div>
+
+	<div class="container-fluid bg1" id="injection">
+		<h3>Injection</h3>
+		<ul class="list-group">
+			<span class="text-danger list-group-item-warning">Problem:</span>
+			<li class="list-group-item">Injection of commands sql to retrieve data from database</li>
+			<li class="list-group-item">Text field that are not protected</li>
+			<br />
+			<span class="text-success list-group-item-primary">Possible solutions:</span>
+			<li class="list-group-item">Havij is automated sql injection software that can help to check vulnerability</li>
+			<li class="list-group-item">Privilege settings</li>
+			<li class="list-group-item">Parameters to untrusted data (data from user input)</li>
+			<li class="list-group-item">Stored procedures</li>
+			<li class="list-group-item">Whitelist (only accepts valid values) and blacklist (only block not valid values)</li>
+			<li class="list-group-item">ORM (Object Relational Mapping) transforms tables into classes and fields into variables</li>
+			<br />
+			<span class="list-group-item-dark">Example:</span>
+			<li class="list-group-item">Example</li>
+		</ul>
+	</div>
+
+	<div class="container-fluid bg2" id="xss">
+		<h3>Cross Site Scripting</h3>
+		<ul class="list-group">
+			<span class="text-danger list-group-item-warning">Problem:</span>
+			<li class="list-group-item">Injection of scripts into page</li>
+			<li class="list-group-item">Output encoding</li>
+			<br />
+			<span class="text-success list-group-item-primary">Possible solutions:</span>
+			<li class="list-group-item">Change &lt;&gt; to &amp;lt; and &amp;gt; to display the data as it was input for HTML</li>
+			<li class="list-group-item">\x3ci\x3e and \x3c\x2fi\x3e for JS</li>
+			<li class="list-group-item">Label text doesn't automatically correct it, but its tooltip does</li>
+			<li class="list-group-item">Requmest Validate valids inputs where it is set to true, on page, on controller etc.</li>
+			<li class="list-group-item">Prevent from inside data</li>
+			<li class="list-group-item">Native browser defenses can cause false positives</li>
+			<li class="list-group-item">URL obfuscation</li>
+			<br />
+			<span class="list-group-item-dark">Example:</span>
+			<li class="list-group-item">Example</li>
+		</ul>
+	</div>
+	<div class="container-fluid bg3" id="session">
+		<h3>Broken Authentication and Session Management</h3>
+		<ul class="list-group">
+			<span class="text-danger list-group-item-warning">Problem:</span>
+			<li class="list-group-item">Access to someone else's account through session's id in the URL</li>
+			<li class="list-group-item">URLs can be shared or can be stored in history and data can be exposed</li>
+			<li class="list-group-item">XSS can snif cookies</li>
+			<br />
+			<span class="text-success list-group-item-primary">Possible solutions:</span>
+			<li class="list-group-item">Session's id can be stored in cookies</li>
+			<li class="list-group-item">Timeouts can be set to prevent sessions to be hijacked</li>
+			<li class="list-group-item">Always store in a cryptographically secure way</li>
+			<li class="list-group-item">Minimum password criteria</li>
+			<br />
+			<span class="list-group-item-dark">Example:</span>
+			<li class="list-group-item">Example</li>
+		</ul>
+	</div>
+
+	<div class="container-fluid bg4" id="objReference">
+		<h3>Insecure Direct Object References</h3>
+		<ul class="list-group">
+			<span class="text-danger list-group-item-warning">Problem:</span>
+			<li class="list-group-item">An URL like www.example.com/UserProfile?userName=JohnDoe can be sniffed and changed to another userName, the application will return another user information's</li>
+			<li class="list-group-item">Changing values in URL can return information not allowed to the user</li>
+			<li class="list-group-item">If a URL is www.social.com/User?userEmail=someone@company.com it's insecure because people know each other email</li>
+			<li class="list-group-item">A robot can input guessed or enumerated values by an automated script and get access to data</li>
+			<li class="list-group-item">Insecure direct object reference gives access controls to the hacker</li>
+			<li class="list-group-item">Integer and String types are vulnerable to enumeration, the attacker can make a simple script to this case</li>
+
+			<br />
+			<span class="text-success list-group-item-primary">Possible solutions:</span>
+			<li class="list-group-item">It's possible to verify the identity of the user to check if he has access to the information requested</li>
+			<li class="list-group-item">Ensure that the right person has access to the right information</li>
+			<li class="list-group-item">Inderect reference makes the user uses an temporary id mapped on the server</li>
+			<li class="list-group-item">GUID instead of Integer or String</li>
+			<li class="list-group-item">Access controls</li>
+			<br />
+			<span class="list-group-item-dark">Example:</span>
+			<li class="list-group-item">http://mybank.com/Account?id=123456</li>
+		</ul>
+	</div>
+
+	<div class="container-fluid bg5" id="csrf">
+		<h3>Cross Site Request Forgery (CSRF)</h3>
+		<ul class="list-group">
+			<span class="text-danger list-group-item-warning">Problem:</span>
+			<li class="list-group-item">Attacker can use cookies to send a request as if he was the victim</li>
+			<li class="list-group-item">Exploited routers can use malicious DNS servers, a request can be sent to google.com, but the malicious DNS server can return a fake google.com</li>
+			<li class="list-group-item">The attackers can recreate a user request with a malicious payload (query string parameters or post data)</li>
+			<li class="list-group-item">The requested website will view the request as if it is from the user</li>
+			<li class="list-group-item">This attack can propagate very easily in social media</li>
+			<br />
+			<span class="text-success list-group-item-primary">Possible solutions:</span>
+			<li class="list-group-item">Anti-forgery tokens can be used as a key for the communication between form on page and the browser</li>
+			<li class="list-group-item">Pages with forms can be loaded with tokens in hidden fields, when the request is submitted, browser will reject if the token doesn't match</li>
+			<li class="list-group-item">Validates the IP posting the data</li>
+			<li class="list-group-item">Referrer checking to check who's posting data</li>
+			<br />
+			<span class="list-group-item-dark">Example:</span>
+			<li class="list-group-item"></li>
+		</ul>
+	</div>
+
+	<div class="container-fluid bg6" id="security">
+		<h3>Security Misconfiguration</h3>
+		<ul class="list-group">
+			<span class="text-danger list-group-item-warning">Problem:</span>
+			<li class="list-group-item">Attackers can have access to accounts, unused pages, unprotected files and directories, etc.</li>
+			<li class="list-group-item">They can also gain unauthorised access to system data or functionality</li>
+			<li class="list-group-item">Knowledge of the system can be an important flaw</li>
+			<li class="list-group-item">Trace handler has logs and information about the system that can be used to gain data from server</li>
+			<li class="list-group-item">Vulnerable outdated packages</li>
+			<br />
+			<span class="text-success list-group-item-primary">Possible solutions:</span>
+			<li class="list-group-item">Supress warnings and exceptions with code lines</li>
+			<li class="list-group-item">Custom error messages to the user</li>
+			<li class="list-group-item">Redirect the user to an error page, this will return a 302 response (move) instead of a 500 (internal server error)</li>
+			<li class="list-group-item">Redirect in rewrite mode will load the error page inside the current page, this will return a 200 response (ok)</li>
+			<li class="list-group-item">Disable trace handler</li>
+			<li class="list-group-item">Update packages, NuGet can be used</li>
+			<li class="list-group-item">Right configuration on web.config file</li>
+			<br />
+			<span class="list-group-item-dark">Example:</span>
+			<li class="list-group-item">https://www.example.com/trace.axd</li>
+		</ul>
+	</div>
+
+	<div class="container-fluid bg7" id="crypto">
+		<h3>Insecure Cryptographic Storage</h3>
+		<ul class="list-group">
+			<span class="text-danger list-group-item-warning">Problem:</span>
+			<li class="list-group-item">User's passwords stored insecurily</li>
+			<li class="list-group-item">Credentials stored as plain text or encrypted</li>
+			<li class="list-group-item">Brute force comparing dictionaries to discover stored data</li>
+			<li class="list-group-item">Hashcat is a brute force tool to crack passwords</li>
+			<li class="list-group-item">Rainbow tables can be used to discover hashed data</li>
+			<li class="list-group-item">Hashing multiple times data can slow down the server</li>
+			<br />
+			<span class="text-success list-group-item-primary">Possible solutions:</span>
+			<li class="list-group-item">Hash the data</li>
+			<li class="list-group-item">Compare the hashed version of user input to the hashed data stored</li>
+			<li class="list-group-item">Store data using salt, this is a sequence of random bytes added to data before hashing</li>
+			<li class="list-group-item">Data can be hashed multiple times to make it harder to be discovered</li>
+			<li class="list-group-item">Encryption utilities such as BCrypt.Net</li>
+			<li class="list-group-item">Always upgrade the hashing algorithm</li>
+			<li class="list-group-item">Encryption and hashing is used as last defense and slow down the time to crack</li>
+			<br />
+			<span class="list-group-item-dark">Example:</span>
+			<li class="list-group-item"></li>
+		</ul>
+	</div>
+
+	<div class="container-fluid bg8" id="urlAccess">
+		<h3>Failure to Restrict URL Access</h3>
+		<ul class="list-group">
+			<span class="text-danger list-group-item-warning">Problem:</span>
+			<li class="list-group-item">Access to restricted pages by changing the URL</li>
+			<li class="list-group-item">APIs can be monitored without access control</li>
+			<li class="list-group-item">Credentials in URL can be cached or intercepted</li>
+			<li class="list-group-item">Obfuscated URLs or websites without a domain (IP only) are false protection pratices</li>
+			<br />
+			<span class="text-success list-group-item-primary">Possible solutions:</span>
+			<li class="list-group-item">Configuring identities and roles that can access determined pages</li>
+			<li class="list-group-item">MVC authorize atribute</li>
+			<li class="list-group-item">Roles can be set to determine which users can access restricted pages</li>
+			<li class="list-group-item">Protect APIs</li>
+			<li class="list-group-item">If there's no access control, the resource is public</li>
+			<li class="list-group-item">Protect the path or the resource (routes or controllers</li>
+			<br />
+			<span class="list-group-item-dark">Example:</span>
+			<li class="list-group-item">https://www.example.com/Admin</li>
+		</ul>
+	</div>
+
+	<div class="container-fluid bg9" id="tls">
+		<h3>Insufficient Transport Layer Protection</h3>
+		<ul class="list-group">
+			<span class="text-danger list-group-item-warning">Problem:</span>
+			<li class="list-group-item">Network traffic not protected</li>
+			<li class="list-group-item">Expired certificates</li>
+			<li class="list-group-item">Improperly configured certificates</li>
+			<li class="list-group-item">Javascript scripts can be added to requests or responses</li>
+			<li class="list-group-item">Cookies can be intercepted and session can be hijacked</li>
+			<br />
+			<span class="text-success list-group-item-primary">Possible solutions:</span>
+			<li class="list-group-item">Require SSL</li>
+			<li class="list-group-item">Secure cookies over SSL</li>
+			<li class="list-group-item">If https is used, it's a good pratice to use https to external resources (jQuery, bootstrap, etc.)</li>
+			<li class="list-group-item">Block http request to login pages</li>
+			<li class="list-group-item">Sensitive data can't be passed in https or http</li>
+			<br />
+			<span class="list-group-item-dark">Example:</span>
+			<li class="list-group-item">http://www.myaccount.com/login</li>
+		</ul>
+	</div>
+
+	<div class="container-fluid bg0" id="redirects">
+			<h3>Unvalidated Redirects and Forwards</h3>
+			<ul class="list-group">
+				<span class="text-danger list-group-item-warning">Problem:</span>
+				<li class="list-group-item">A trusted website redirects users to another site, this can let attackers use this functionality to redirect users to evil sites</li>
+				<li class="list-group-item">Shorten URL such as http://brasil.gov/ABC can be used to gain user's trust</li>
+				<li class="list-group-item">Those URLs can be distributed over email, social media and legitimate sites</li>
+				<li class="list-group-item">Spam filter detection is harder because of the trusted domain</li>
+				<li class="list-group-item">Some websites only show first part of the address before users click it</li>
+				<br />
+				<span class="text-success list-group-item-primary">Possible solutions:</span>
+				<li class="list-group-item">Implement a whitelist</li>
+				<li class="list-group-item">Create a referrer validation</li>
+				<br />
+				<span class="list-group-item-dark">Example:</span>
+				<li class="list-group-item">http://www.trustedsite.com/redirect.aspx?url=http://www.evilsite.com/malware.exe</li>
+				<li class="list-group-item">http://1.usa.gov/SHORTENED-EVIL-SITE</li>
+			</ul>
+		</div>
+</body>
+</html>
